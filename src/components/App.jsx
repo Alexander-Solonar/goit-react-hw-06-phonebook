@@ -5,6 +5,8 @@ import ContactList from './contactList';
 import Filter from './filter';
 import css from './App.module.css';
 
+import { useSelector } from 'react-redux';
+
 const LOCAL_KEY = 'array-users-contacts';
 const isLocalStorage = JSON.parse(localStorage.getItem(LOCAL_KEY));
 
@@ -13,7 +15,7 @@ export const App = () => {
     isLocalStorage && isLocalStorage.length > 0 ? isLocalStorage : userContacts
   );
 
-  const [filter, setFilter] = useState('');
+  const filter = useSelector(state => state.filter);
 
   useEffect(() => {
     window.localStorage.setItem(LOCAL_KEY, JSON.stringify(contacts));
@@ -34,10 +36,6 @@ export const App = () => {
     setContacts([newContact, ...contacts]);
   };
 
-  const filterChange = event => {
-    setFilter(event.target.value);
-  };
-
   const deleteContact = contactId => {
     setContacts(contacts.filter(({ id }) => id !== contactId));
   };
@@ -55,7 +53,7 @@ export const App = () => {
       <h1>Phonebook</h1>
       <ContactForm addContacts={addContacts} />
       <h2>Contacts</h2>
-      <Filter value={filter} onfilterChange={filterChange} />
+      <Filter />
       <ContactList data={visibleContacts()} onDeleteContact={deleteContact} />
     </div>
   );
