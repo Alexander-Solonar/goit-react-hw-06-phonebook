@@ -4,7 +4,7 @@ import css from './ContactList.module.css';
 
 const ContactList = () => {
   const filter = useSelector(state => state.filter);
-  const contacts = useSelector(state => state.contacts.defaultContacts);
+  const contacts = useSelector(state => state.contacts.contacts);
   const dispatch = useDispatch();
 
   const visibleContacts = () => {

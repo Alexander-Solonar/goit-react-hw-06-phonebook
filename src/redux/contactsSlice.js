@@ -6,16 +6,14 @@ import storage from 'redux-persist/lib/storage';
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
-    defaultContacts,
+    contacts: defaultContacts,
   },
   reducers: {
     addContact(state, action) {
-      state.defaultContacts.unshift(action.payload);
+      state.contacts.unshift(action.payload);
     },
     deleteContact(state, action) {
-      state.defaultContacts = state.defaultContacts.filter(
-        ({ id }) => id !== action.payload
-      );
+      state.contacts = state.contacts.filter(({ id }) => id !== action.payload);
     },
   },
 });
